@@ -1,0 +1,1 @@
+Nest, TypeORM, Postgre, RabbitMQ, Microservices
