@@ -1,12 +1,12 @@
 import { ChallengeStatus } from 'src/app/domain/challenge/util/challenge-status.enum';
 import { PlayerEntity } from 'src/app/domain/player/entities/player.entity';
 import { CustomBaseEntity } from 'src/shared/custom-base.entity';
-import { Column, Entity, JoinTable, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity('challenges')
 export class ChallengeEntity extends CustomBaseEntity {
   //bideritional relation
-  @ManyToOne(() => PlayerEntity, (player) => player.challenges, {
+  @ManyToMany(() => PlayerEntity, (player) => player.challenges, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
@@ -17,7 +17,7 @@ export class ChallengeEntity extends CustomBaseEntity {
   })
   players: PlayerEntity[];
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   createByPlayer: string;
 
   @Column({

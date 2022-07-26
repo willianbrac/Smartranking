@@ -8,7 +8,6 @@ import { Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 export class SubscriptionEntity extends CustomBaseEntity {
   @ManyToOne(() => TournamentEntity, (tournament) => tournament.subscriptions, {
     nullable: false,
-    eager: true,
   })
   tournament: TournamentEntity;
 

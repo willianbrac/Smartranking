@@ -28,17 +28,13 @@ export class PlayersService {
   }
 
   public async findPlayerById(id: string): Promise<PlayerEntity | any> {
-    try {
-      const player = await this.playersRepository
-        .createQueryBuilder('players')
-        .leftJoinAndSelect('players.subscription', 'subscription')
-        .where('players.id = :id', { id })
-        .getOne();
-
-      return player;
-    } catch (error) {
-      throw new NotFoundException(`Player not found: ${error.message}`);
-    }
+    const player = await this.playersRepository
+      .createQueryBuilder('players')
+      .leftJoinAndSelect('players.subscription', 'subscription')
+      .where('players.id = :id', { id })
+      .getOne();
+    if (!player) throw new NotFoundException(`Player not found!`);
+    return player;
   }
 
   private async findPlayerByEmail(email: string): Promise<PlayerEntity> {
