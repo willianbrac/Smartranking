@@ -1,5 +1,6 @@
-import { Controller, Logger } from '@nestjs/common';
+import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { CreatePlayerDto } from './dtos/create-player.dto';
 import {
   ClientProxy,
   ClientProxyFactory,
@@ -19,5 +20,10 @@ export class AppController {
         queue: configService.get('RABBITMQ_CLUSTER_QUEUE'),
       },
     });
+  }
+
+  @Post()
+  createPlayer(@Body() data: CreatePlayerDto) {
+    return this.clientBackend.emit('create-player', data);
   }
 }
