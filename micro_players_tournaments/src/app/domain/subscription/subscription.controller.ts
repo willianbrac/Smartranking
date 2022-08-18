@@ -3,8 +3,8 @@ import {
   Post,
   UsePipes,
   ValidationPipe,
-  Param,
   ParseUUIDPipe,
+  Query,
 } from '@nestjs/common';
 import { SubscriptionEntity } from 'src/app/domain/subscription/entities/subscription.entity';
 import { SubscriptionsService } from 'src/app/domain/subscription/subscriptions.service';
@@ -15,15 +15,15 @@ export class SubscriptionsController {
     private readonly subscriptionsService: SubscriptionsService,
   ) {}
 
-  @Post('/:player_id/subscribe/:tournament_id')
+  @Post()
   @UsePipes(ValidationPipe)
   public async createSubscription(
-    @Param('player_id', new ParseUUIDPipe()) player_id: string,
-    @Param('tournament_id', new ParseUUIDPipe()) tournament_id: string,
+    @Query('playerId', new ParseUUIDPipe()) playerId: string,
+    @Query('tournamentId', new ParseUUIDPipe()) tournamentId: string,
   ): Promise<SubscriptionEntity> {
     return await this.subscriptionsService.createSubscription({
-      player_id,
-      tournament_id,
+      playerId,
+      tournamentId,
     });
   }
 }

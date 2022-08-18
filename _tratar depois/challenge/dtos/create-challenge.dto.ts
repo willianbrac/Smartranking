@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsString,
 } from 'class-validator';
+import { PlayerEntity } from 'src/app/domain/player/entities/player.entity';
 import { BaseEntity } from 'typeorm';
 
 export class CreateChallengeDto extends BaseEntity {
@@ -16,5 +17,5 @@ export class CreateChallengeDto extends BaseEntity {
 
   @IsString()
   @IsNotEmpty()
-  createByPlayer: string;
+  playerChallenger: PlayerEntity;
 }

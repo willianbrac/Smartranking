@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePlayerDto } from 'src/app/domain/player/dtos/create-player.dto';
-import { UpdatePlayerDto } from 'src/app/domain/player/dtos/update-player.dto';
 import { PlayerEntity } from 'src/app/domain/player/entities/player.entity';
 import { Repository } from 'typeorm';
 
@@ -42,17 +41,8 @@ export class PlayersService {
   }
 
   public async findAllPlayers(): Promise<PlayerEntity[]> {
-    return await this.playersRepository.find();
-  }
-
-  public async updatePlayer(id: string, data: UpdatePlayerDto) {
-    try {
-      const player = await this.findPlayerById(id);
-      this.playersRepository.merge(player, data);
-      return await this.playersRepository.save(player);
-    } catch (error) {
-      throw new NotFoundException(`Player not found: ${error.message}`);
-    }
+    const players = await this.playersRepository.find();
+    return players;
   }
 
   public async deletePlayerById(id: string): Promise<void> {

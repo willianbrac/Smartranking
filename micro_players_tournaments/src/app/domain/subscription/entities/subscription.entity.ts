@@ -13,7 +13,6 @@ export class SubscriptionEntity extends CustomBaseEntity {
 
   @OneToOne(() => PlayerEntity, (player) => player.subscription, {
     nullable: false,
-    eager: true,
   })
   @JoinColumn()
   player: PlayerEntity;

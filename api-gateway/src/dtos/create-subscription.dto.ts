@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateTournamentDto {
+export class CreateSubscriptionDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  tournamentId: string;
 
   @IsString()
   @IsNotEmpty()
-  description: string;
+  playerId: string;
 }

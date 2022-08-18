@@ -5,11 +5,7 @@ import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity('challenges')
 export class ChallengeEntity extends CustomBaseEntity {
-  //bideritional relation
-  @ManyToMany(() => PlayerEntity, (player) => player.challenges, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  @ManyToMany(() => PlayerEntity, (player) => player.challenges)
   @JoinTable({
     name: 'challenges_players',
     joinColumn: { name: 'challengeId' },
@@ -18,7 +14,7 @@ export class ChallengeEntity extends CustomBaseEntity {
   players: PlayerEntity[];
 
   @Column({ type: 'varchar', nullable: false })
-  createByPlayer: string;
+  playerChallenger: PlayerEntity;
 
   @Column({
     type: 'enum',

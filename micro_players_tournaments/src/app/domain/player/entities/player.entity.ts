@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { ChallengeEntity } from 'src/app/domain/challenge/entities/challenge.entity';
 import { SubscriptionEntity } from 'src/app/domain/subscription/entities/subscription.entity';
 import { CustomBaseEntity } from 'src/shared/custom-base.entity';
-import { Column, Entity, ManyToMany, OneToOne } from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 @Entity('players')
 export class PlayerEntity extends CustomBaseEntity {
@@ -20,9 +19,4 @@ export class PlayerEntity extends CustomBaseEntity {
     onDelete: "CASCADE",
   })
   subscription: SubscriptionEntity;
-
-  @ManyToMany(() => ChallengeEntity, (challenge) => challenge.players, {
-    onDelete: "CASCADE"
-  })
-  challenges: ChallengeEntity[];
 }

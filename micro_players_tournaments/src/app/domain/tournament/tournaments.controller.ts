@@ -10,7 +10,7 @@ import { CreateTournamentDto } from 'src/app/domain/tournament/dtos/create-tourn
 import { TournamentEntity } from 'src/app/domain/tournament/entities/tournament.entity';
 import { TournamentsService } from 'src/app/domain/tournament/tournaments.service';
 
-@Controller('tournament')
+@Controller('tournaments')
 export class TournamentsController {
   public constructor(private readonly tournamentsService: TournamentsService) {}
 

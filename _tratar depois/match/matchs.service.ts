@@ -6,7 +6,7 @@ import { PlayersService } from 'src/app/domain/player/players.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class ChallengesService {
+export class MatchsService {
   public constructor(
     @InjectRepository(ChallengeEntity)
     private readonly challengesRepository: Repository<ChallengeEntity>,
@@ -14,8 +14,8 @@ export class ChallengesService {
   ) {}
 
   // Function temporary
-  public async createChallenge(body: CreateChallengeDto) {
-    const { players, createByPlayer } = body;
+  public async createMatch(body: CreateChallengeDto) {
+    const { players, playerChallenger } = body;
 
     const player1 = await this.playersService.findPlayerById(players[0]);
     const player2 = await this.playersService.findPlayerById(players[1]);
@@ -28,7 +28,7 @@ export class ChallengesService {
 
     const newChallenge = this.challengesRepository.create({
       players: [player1, player2],
-      createByPlayer,
+      playerChallenger,
     });
     await newChallenge.save();
     return newChallenge;
